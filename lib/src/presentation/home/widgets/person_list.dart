@@ -1,5 +1,5 @@
-import 'package:bill_calculator/add_person_dialog.dart';
-import 'package:bill_calculator/models/person.dart';
+import 'package:bill_calculator/src/presentation/home/widgets/add_person_dialog.dart';
+import 'package:bill_calculator/src/domain/models/person.dart';
 import 'package:bill_calculator/utils/color_ext.dart';
 import 'package:bill_calculator/utils/string_ext.dart';
 import 'package:flutter/material.dart';
