@@ -1,21 +1,28 @@
+import 'package:bill_calculator/src/domain/models/person.dart';
+import 'package:bill_calculator/utils/string_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class AddPersonDialog extends StatefulWidget {
-  const AddPersonDialog({super.key});
+class AddUpdatePersonDialog extends StatefulWidget {
+  const AddUpdatePersonDialog({super.key, this.person});
+
+  final Person? person;
 
   @override
-  State<AddPersonDialog> createState() => _AddPersonDialogState();
+  State<AddUpdatePersonDialog> createState() => _AddUpdatePersonDialogState();
 }
 
-class _AddPersonDialogState extends State<AddPersonDialog> {
+class _AddUpdatePersonDialogState extends State<AddUpdatePersonDialog> {
   String? _errorText;
   late final TextEditingController _nameController;
   @override
   void initState() {
     _nameController = TextEditingController();
+    if (widget.person != null) {
+      _nameController.text = widget.person!.name;
+    }
     super.initState();
   }
 
@@ -58,7 +65,9 @@ class _AddPersonDialogState extends State<AddPersonDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Add Person',
+                  widget.person != null
+                      ? 'Edit Person'.hardCode
+                      : 'Add Person'.hardCode,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const Gap(24),
@@ -76,7 +85,9 @@ class _AddPersonDialogState extends State<AddPersonDialog> {
                   width: double.infinity,
                   child: FilledButton(
                     onPressed: _onDone,
-                    child: const Text('Add'),
+                    child: Text(
+                      widget.person != null ? 'Save'.hardCode : 'Add'.hardCode,
+                    ),
                   ),
                 ),
                 SizedBox(

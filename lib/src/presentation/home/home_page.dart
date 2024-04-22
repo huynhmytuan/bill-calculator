@@ -2,9 +2,7 @@ import 'package:bill_calculator/src/presentation/home/widgets/person_list.dart';
 import 'package:bill_calculator/src/presentation/theme/theme_provider.dart';
 import 'package:bill_calculator/src/presentation/widgets/invoice_card.dart';
 import 'package:bill_calculator/utils/color_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
@@ -28,6 +26,10 @@ class HomePage extends ConsumerWidget {
             onPressed: themeNotifier.toggleTheme,
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
       body: const Column(
         children: [
