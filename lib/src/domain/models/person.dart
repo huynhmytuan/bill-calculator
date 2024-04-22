@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class Person extends Equatable {
-  const Person({
-    Uuid? id,
+  Person({
+    String? id,
     required this.name,
     this.color = Colors.blue,
-  }) : id = id ?? const Uuid();
+  }) : id = id ?? const Uuid().v4();
 
-  final Uuid id;
+  final String id;
   final String name;
   final Color color;
 
   Person copyWith({
-    Uuid? id,
+    String? id,
     String? name,
     Color? color,
   }) {
