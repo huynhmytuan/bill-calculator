@@ -51,7 +51,7 @@ class ActionBottomSheet<T> extends StatelessWidget {
               children: [
                 DecoratedBox(
                   decoration: BoxDecoration(
-                    color: theme.dividerColor.lighten(.4),
+                    color: theme.dividerColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const SizedBox(
@@ -74,14 +74,13 @@ class ActionBottomSheet<T> extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        tileColor:
-                            theme.colorScheme.surfaceTint.withOpacity(.2),
+                        tileColor: theme.colorScheme.secondaryContainer,
                         titleTextStyle: theme.textTheme.titleMedium!.copyWith(
-                          color: theme.colorScheme.onSurface,
+                          color: theme.colorScheme.onSecondaryContainer,
                         ),
                         leading: DecoratedBox(
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.tertiary.withOpacity(.3),
+                            color: theme.colorScheme.primary,
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -89,7 +88,7 @@ class ActionBottomSheet<T> extends StatelessWidget {
                             child: Icon(
                               item.icon,
                               size: 20,
-                              color: theme.colorScheme.tertiary,
+                              color: theme.colorScheme.onPrimary,
                             ),
                           ),
                         ),

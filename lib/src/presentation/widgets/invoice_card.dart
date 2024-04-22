@@ -7,10 +7,11 @@ class InvoiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.tertiaryContainer,
+        color: theme.colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -45,19 +46,9 @@ class InvoiceCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
-                '2 TX(s)',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
             ],
           ),
-          Divider(
-            height: 24,
-            color: Theme.of(context)
-                .colorScheme
-                .onPrimaryContainer
-                .withOpacity(.3),
-          ),
+          const Gap(24),
           Row(
             children: [
               Expanded(
@@ -81,13 +72,25 @@ class InvoiceCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Paid',
+                      'Paid by',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const Gap(4),
-                    Text(
-                      '\$100.00',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                    Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 12,
+                          child: Icon(
+                            Icons.person,
+                            size: 12,
+                          ),
+                        ),
+                        const Gap(4),
+                        Text(
+                          'John Doe',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
                     ),
                   ],
                 ),
