@@ -1,6 +1,5 @@
-import 'package:bill_calculator/configs/themes/color_schemes.g.dart';
 import 'package:bill_calculator/src/presentation/home/home_page.dart';
-import 'package:bill_calculator/src/presentation/theme/app_themes.dart';
+import 'package:bill_calculator/configs/themes/app_themes.dart';
 import 'package:bill_calculator/src/presentation/theme/theme_provider.dart';
 import 'package:bill_calculator/utils/custom_scroll_behavior.dart';
 import 'package:flutter/material.dart';

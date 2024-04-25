@@ -1,30 +1,19 @@
-import 'package:bill_calculator/src/presentation/home/providers/persons_provider.dart';
-import 'package:bill_calculator/src/presentation/home/widgets/add_edit_person_dialog.dart';
-import 'package:bill_calculator/src/domain/models/person.dart';
-import 'package:bill_calculator/src/presentation/widgets/action_bottom_sheet.dart';
-import 'package:bill_calculator/utils/color_ext.dart';
-import 'package:bill_calculator/utils/string_ext.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
+part of '../home_page.dart';
 
-class PersonsList extends ConsumerWidget {
-  const PersonsList({super.key});
+class _PersonsList extends ConsumerWidget {
+  const _PersonsList({super.key});
 
   Future<void> _showAddUpdatePersonDialog(
     BuildContext context,
     WidgetRef ref, {
     Person? person,
   }) async {
-    final newPersonName = await showDialog<String?>(
+    final newPersonName = await showMaterialModalBottomSheet<String?>(
       context: context,
-      barrierDismissible: true,
       useRootNavigator: true,
+      isDismissible: true,
       builder: (context) {
-        return AddUpdatePersonDialog(
-          person: person,
-        );
+        return AddUpdatePersonBottomSheet(person: person);
       },
     );
     if (newPersonName != null) {
@@ -48,11 +37,13 @@ class PersonsList extends ConsumerWidget {
     Person person,
   ) async {
     // Show options
-    final chosen = await showModalBottomSheet(
+    final chosen = await showMaterialModalBottomSheet(
       context: context,
-      isScrollControlled: true,
       isDismissible: true,
+      useRootNavigator: true,
+      expand: false,
       builder: (_) => ActionBottomSheet(
+        title: 'Options'.hardCode,
         items: [
           ActionSheetItem(
             value: 0,
@@ -63,6 +54,7 @@ class PersonsList extends ConsumerWidget {
             value: 1,
             icon: Icons.delete_forever,
             label: 'Delete'.hardCode,
+            color: Colors.red.shade700,
           ),
         ],
       ),
@@ -99,20 +91,21 @@ class PersonsList extends ConsumerWidget {
                 child: LayoutBuilder(builder: (context, constrains) {
                   final height = constrains.maxHeight;
                   return ListView.separated(
-                    // padding: const EdgeInsets.all(8),
                     scrollDirection: Axis.horizontal,
                     itemCount: persons.length,
                     separatorBuilder: (context, index) => const Gap(8),
                     itemBuilder: (context, index) {
+                      final person = persons[index];
                       return SizedBox(
                         height: height,
-                        child: _PersonWidget(
+                        child: PersonWidget(
                           onTap: () => _showOptions(
                             context,
                             ref,
                             persons[index],
                           ),
-                          person: persons[index],
+                          color: person.color,
+                          name: person.name,
                         ),
                       );
                     },
@@ -160,45 +153,6 @@ class _AddIcon extends StatelessWidget {
             ),
             const Gap(4),
             Text('Add'.hardCode),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _PersonWidget extends StatelessWidget {
-  const _PersonWidget({
-    super.key,
-    this.onTap,
-    required this.person,
-  });
-  final VoidCallback? onTap;
-  final Person person;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(12),
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 24,
-              backgroundColor: person.color,
-              child: Text(
-                person.name.wordsInitials(),
-                style: TextStyle(
-                  color: person.color.contrastColor,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const Gap(4),
-            Text(person.name),
           ],
         ),
       ),
