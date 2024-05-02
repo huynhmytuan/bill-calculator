@@ -22,7 +22,7 @@ class _PersonsList extends ConsumerWidget {
         personsNotifier.updatePerson(person.copyWith(name: newPersonName));
       } else {
         personsNotifier.addPerson(
-          Person(
+          Person.raw(
             name: newPersonName,
             color: Colors.primaries[Colors.primaries.length - 1],
           ),
@@ -39,9 +39,9 @@ class _PersonsList extends ConsumerWidget {
     // Show options
     final chosen = await showMaterialModalBottomSheet(
       context: context,
-      isDismissible: true,
+      // isDismissible: true,
       useRootNavigator: true,
-      expand: false,
+      // expand: false,
       builder: (_) => ActionBottomSheet(
         title: 'Options'.hardCode,
         items: [

@@ -1,3 +1,4 @@
+import 'package:bill_calculator/src/presentation/widgets/custom_inkwell.dart';
 import 'package:bill_calculator/utils/color_ext.dart';
 import 'package:bill_calculator/utils/string_ext.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class PersonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return InkWell(
+    return CustomInkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
       child: Padding(

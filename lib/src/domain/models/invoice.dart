@@ -1,20 +1,20 @@
+import 'package:bill_calculator/src/domain/models/destruction.dart';
+import 'package:bill_calculator/src/domain/models/expense.dart';
 import 'package:bill_calculator/src/domain/models/person.dart';
-import 'package:bill_calculator/src/domain/models/transaction.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Invoice {
-  Invoice({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.transactions,
-    required this.date,
-    required this.payer,
-  });
+part 'invoice.freezed.dart';
 
-  final String id;
-  final String title;
-  final String description;
-  final List<Transaction> transactions;
-  final DateTime date;
-  final Person payer;
+@freezed
+class Invoice with _$Invoice {
+  factory Invoice({
+    required String id,
+    required String title,
+    required String? description,
+    required DateTime date,
+    required Person paidBy,
+    @Default([]) List<Expense> expenses,
+    @Default([]) List<Destruction> destructions,
+    @Default([]) List<Person> participants,
+  }) = _Invoice;
 }

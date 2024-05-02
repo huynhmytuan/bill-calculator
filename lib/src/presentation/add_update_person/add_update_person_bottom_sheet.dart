@@ -55,8 +55,7 @@ class AddUpdatePersonBottomSheet extends HookConsumerWidget {
         return;
       }
       FocusManager.instance.primaryFocus?.unfocus();
-      final data = Person(
-        id: person?.id,
+      final data = Person.raw(
         name: nameEditingController.text,
         color: pickedColor.value ?? Colors.primaries.first,
       );

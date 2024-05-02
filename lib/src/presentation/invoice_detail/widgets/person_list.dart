@@ -12,37 +12,36 @@ class _PersonList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final persons = [
-      Person(name: 'Person 1'),
-      Person(name: 'Person 2'),
-      Person(name: 'Person 3'),
+      Person.raw(name: 'Person 1'),
+      Person.raw(name: 'Person 2'),
+      Person.raw(name: 'Person 3'),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Persons (${persons.length})',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        SizedBox(
-          height: 110,
-          child: LayoutBuilder(builder: (context, constrains) {
-            final height = constrains.maxHeight;
-            return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 3,
-              separatorBuilder: (context, index) => const Gap(8),
-              itemBuilder: (context, index) {
-                return SizedBox(
-                  height: height,
-                  child: PersonWidget(
-                    isSelected: index == 1,
-                    onTap: () => _filterPerson(context, ref, persons[index]),
-                    name: persons[index].name,
-                  ),
-                );
-              },
-            );
-          }),
+        Section(
+          label: const Text('Person'),
+          child: SizedBox(
+            height: 110,
+            child: LayoutBuilder(builder: (context, constrains) {
+              final height = constrains.maxHeight;
+              return ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                separatorBuilder: (context, index) => const Gap(8),
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    height: height,
+                    child: PersonWidget(
+                      isSelected: index == 1,
+                      onTap: () => _filterPerson(context, ref, persons[index]),
+                      name: persons[index].name,
+                    ),
+                  );
+                },
+              );
+            }),
+          ),
         )
       ],
     );

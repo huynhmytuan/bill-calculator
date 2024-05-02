@@ -1,4 +1,5 @@
-import 'package:bill_calculator/src/presentation/create_invoice/create_invoice_sheet.dart';
+import 'package:animations/animations.dart';
+import 'package:bill_calculator/src/presentation/invoice_detail/invoice_detail_page.dart';
 import 'package:bill_calculator/src/presentation/theme/theme_provider.dart';
 import 'package:bill_calculator/src/presentation/widgets/invoice_card.dart';
 import 'package:bill_calculator/utils/color_ext.dart';
@@ -62,15 +63,28 @@ class _AddInvoiceFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        showMaterialModalBottomSheet(
-          context: context,
-          expand: false,
-          builder: (_) => const CreateInvoiceBottomSheet(),
+    final theme = Theme.of(context);
+    final floatingActionButtonTheme = theme.floatingActionButtonTheme;
+    final closedColor = floatingActionButtonTheme.backgroundColor ??
+        theme.colorScheme.primaryContainer;
+    final closedShape = floatingActionButtonTheme.shape ??
+        const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(18)),
         );
-      },
-      child: const Icon(Icons.add),
+    return OpenContainer(
+      transitionDuration: const Duration(milliseconds: 500),
+      transitionType: ContainerTransitionType.fade,
+      closedColor: closedColor,
+      closedShape: closedShape,
+      closedElevation: 4,
+      openBuilder: (context, action) => const InvoiceDetailPage(),
+      closedBuilder: (context, action) => InkWell(
+        onTap: action,
+        child: const Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Icon(Icons.add),
+        ),
+      ),
     );
   }
 }

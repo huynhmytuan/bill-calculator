@@ -1,30 +1,27 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-class Person extends Equatable {
-  Person({
-    String? id,
-    required this.name,
-    this.color = Colors.blue,
-  }) : id = id ?? const Uuid().v4();
+part 'person.freezed.dart';
 
-  final String id;
-  final String name;
-  final Color color;
+@freezed
+class Person with _$Person {
+  const factory Person({
+    required String id,
+    required String name,
+    required Color color,
+  }) = _Person;
 
-  Person copyWith({
-    String? id,
-    String? name,
+  /// This is a factory constructor that allows you to create a Person instance
+  /// with a random id.
+  factory Person.raw({
+    required String name,
     Color? color,
   }) {
     return Person(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      color: color ?? this.color,
+      id: const Uuid().v4(),
+      name: name,
+      color: color ?? Colors.primaries.first,
     );
   }
-
-  @override
-  List<Object?> get props => [id, name, color];
 }
